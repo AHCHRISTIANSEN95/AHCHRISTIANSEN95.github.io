@@ -47,16 +47,19 @@
 var map;
 
 // The JSON data
-function markMultiple(){
-  $.getJSON('maps.json', function(data) {
-    $.each(data, function(i, obj) {
-  var latLng =  new google.maps.LatLng(obj.lat,obj.lng);
-  var content = obj.id + ':' + obj.lat + ',' + obj.lng;
-  markMap(latLng, content);
-});
 
 
+map.data.loadGeoJson('/maps.json', null, function (features) {
+
+    var markers = features.map(function (feature) {
+        var g = feature.getGeometry();
+        var marker = new google.maps.Marker({ 'position': g.get(0) });
+        return marker;
+    });
+
+    var markerCluster = new MarkerClusterer(map, markers,{ imagePath: 'https://cdn.rawgit.com/googlemaps/js-marker-clusterer/gh-pages/images/m' });
 });
+
 var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
         // Add some markers to the map.
@@ -74,8 +77,6 @@ var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         var markerCluster = new MarkerClusterer(map, markers,
             {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
       }
-
-
 
 function initialize() {
 
