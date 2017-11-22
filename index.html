@@ -247,6 +247,12 @@
       //  });
       //});
 
+      $.each(data, function(i, obj) {
+    var latLng =  new google.maps.LatLng(obj.lat,obj.lng);
+    var content = obj.id + ':' + obj.lat + ',' + obj.lng;
+    markMap(latLng, content);
+
+
       for (var i = 0; i < locations.length; i++) {
         var loc = locations[i];
         var latLng =  new google.maps.LatLng(loc[1],loc[2]);
