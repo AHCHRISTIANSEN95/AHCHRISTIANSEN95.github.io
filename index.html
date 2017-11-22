@@ -239,18 +239,12 @@
     }
 
     function markMultiple(){
-      //$.getJSON('test.json', function(data) {
-      //  $.each(data, function() {
-      //    var latLng =  new google.maps.LatLng(data.lat,data.lng);
-      //    var content = data.id + ':' + data.lat + ',' + data.lng;
-      //    markMap(latLng, content);
-      //  });
-      //});
-
       $.each(data, function(i, obj) {
     var latLng =  new google.maps.LatLng(obj.lat,obj.lng);
     var content = obj.id + ':' + obj.lat + ',' + obj.lng;
     markMap(latLng, content);
+     });
+
 
 
       for (var i = 0; i < locations.length; i++) {
@@ -262,7 +256,7 @@
 
       var markerCluster = new MarkerClusterer(map, markers);
     }
-)
+
     function markMap(position, content){
       var marker = new google.maps.Marker({
         position: position
